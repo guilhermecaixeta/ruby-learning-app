@@ -1,0 +1,1095 @@
+  [1m[35m (42.7ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE DATABASE "agenda_test" ENCODING = 'unicode'[0m
+  [1m[35m (9.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3963357514851621180)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateKinds (20231201201245)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201245"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateContacts (20231201201411)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201411"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAddresses (20231201201454)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201454"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePhones (20231201201634)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201634"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-12-03 17:51:54.994605"], ["updated_at", "2023-12-03 17:51:54.994605"]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(3963357514851621180)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/home" for ::1 at 2023-12-03 18:00:08 +0000
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/index" for ::1 at 2023-12-03 18:00:17 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home/index" for ::1 at 2023-12-03 18:00:23 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 77)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+yarn run v1.22.19
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+
+error Command "webpack" not found.
+
+Completed 500 Internal Server Error in 1062ms (ActiveRecord: 0.0ms | Allocations: 36004)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application in /home/caixeta/documents/ruby-course/agenda/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     6:     <%= csp_meta_tag %>
+     7: 
+     8:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     9:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/views/layouts/application.html.erb:9
+Started GET "/address" for ::1 at 2023-12-03 18:01:24 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/address"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home" for ::1 at 2023-12-03 18:01:34 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home" for ::1 at 2023-12-03 18:02:32 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/kinds" for ::1 at 2023-12-03 18:03:07 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (1.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 1304)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+yarn run v1.22.19
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+
+error Command "webpack" not found.
+
+Completed 500 Internal Server Error in 946ms (ActiveRecord: 2.9ms | Allocations: 7530)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application in /home/caixeta/documents/ruby-course/agenda/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     6:     <%= csp_meta_tag %>
+     7: 
+     8:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     9:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/views/layouts/application.html.erb:9
+Started GET "/kinds" for ::1 at 2023-12-03 18:04:16 +0000
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (2.4ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 7.8ms | Allocations: 1404)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+
+Completed 500 Internal Server Error in 449ms (ActiveRecord: 4.5ms | Allocations: 13422)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application in /home/caixeta/documents/ruby-course/agenda/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     6:     <%= csp_meta_tag %>
+     7: 
+     8:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     9:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/views/layouts/application.html.erb:9
+Started GET "/" for ::1 at 2023-12-03 18:04:18 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/caixeta/.rvm/gems/ruby-2.7.0/gems/railties-6.0.6.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/caixeta/.rvm/gems/ruby-2.7.0/gems/railties-6.0.6.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 8.4ms | Allocations: 183)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.0ms | Allocations: 905)
+
+
+Started GET "/kinds" for ::1 at 2023-12-03 18:05:23 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 921)
+[Webpacker] Compiling...
+[Webpacker] Compilation failed:
+node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+
+Completed 500 Internal Server Error in 426ms (ActiveRecord: 0.6ms | Allocations: 7147)
+
+
+  
+ActionView::Template::Error (Webpacker can't find application in /home/caixeta/documents/ruby-course/agenda/public/packs/manifest.json. Possible causes:
+1. You want to set webpacker.yml value of compile to true for your environment
+   unless you are using the `webpack -w` or the webpack-dev-server.
+2. webpack has not yet re-run to reflect updates.
+3. You have misconfigured Webpacker's config/webpacker.yml file.
+4. Your webpack configuration is not creating a manifest.
+Your manifest contains:
+{
+}
+):
+     6:     <%= csp_meta_tag %>
+     7: 
+     8:     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     9:     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    10:   </head>
+    11: 
+    12:   <body>
+  
+app/views/layouts/application.html.erb:9
+Started GET "/kinds" for ::1 at 2023-12-03 18:12:34 +0000
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (1.4ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 10.4ms | Allocations: 1404)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs
+[Webpacker] Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-transform-class-properties.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-methods since the "loose" mode option was set to "true" for @babel/plugin-transform-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-transform-class-properties.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-methods since the "loose" mode option was set to "true" for @babel/plugin-transform-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] Hash: 666b4b17c239d77fe3e2
+Version: webpack 4.47.0
+Time: 1292ms
+Built at: 12/03/2023 6:12:36 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-82550c4e3b8b39cde23f.js    120 KiB  application  [emitted] [immutable]  application
+js/application-82550c4e3b8b39cde23f.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-82550c4e3b8b39cde23f.js js/application-82550c4e3b8b39cde23f.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+Completed 200 OK in 2479ms (Views: 2465.7ms | ActiveRecord: 4.1ms | Allocations: 12644)
+
+
+Started GET "/kinds/new" for ::1 at 2023-12-03 18:12:38 +0000
+Processing by KindsController#new as HTML
+  Rendering kinds/new.html.erb within layouts/application
+  Rendered kinds/_form.html.erb (Duration: 11.5ms | Allocations: 4022)
+  Rendered kinds/new.html.erb within layouts/application (Duration: 12.8ms | Allocations: 4372)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 17.6ms | ActiveRecord: 3.2ms | Allocations: 10352)
+
+
+Started POST "/kinds" for ::1 at 2023-12-03 18:12:48 +0000
+Processing by KindsController#create as HTML
+  Parameters: {"authenticity_token"=>"mJsrReJHJrodAsRCcGMB5JFbesyfm/SVfQbTqEfMu6WrLI756rCJGSgEqJh7vlC9ehmBuaH66CuKrEbIfEjSkg==", "kind"=>{"description"=>"Conhecido"}, "commit"=>"Create Kind"}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+  [1m[36mKind Create (1.5ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "Conhecido"], ["created_at", "2023-12-03 18:12:48.028222"], ["updated_at", "2023-12-03 18:12:48.028222"]]
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/kinds/1
+Completed 302 Found in 9ms (ActiveRecord: 3.3ms | Allocations: 3024)
+
+
+Started GET "/kinds/1" for ::1 at 2023-12-03 18:12:48 +0000
+Processing by KindsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mKind Load (0.9ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/kinds_controller.rb:63:in `set_kind'
+  Rendering kinds/show.html.erb within layouts/application
+  Rendered kinds/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 246)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 5.9ms | ActiveRecord: 1.4ms | Allocations: 5118)
+
+
+Started GET "/kinds" for ::1 at 2023-12-03 18:12:50 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 856)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 6ms (Views: 4.9ms | ActiveRecord: 0.6ms | Allocations: 4582)
+
+
+Started GET "/kinds/new" for ::1 at 2023-12-03 18:12:52 +0000
+Processing by KindsController#new as HTML
+  Rendering kinds/new.html.erb within layouts/application
+  Rendered kinds/_form.html.erb (Duration: 0.9ms | Allocations: 621)
+  Rendered kinds/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 712)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 4429)
+
+
+Started POST "/kinds" for ::1 at 2023-12-03 18:13:00 +0000
+Processing by KindsController#create as HTML
+  Parameters: {"authenticity_token"=>"MQIsIGNU05Ed6Hdri9DinjAjWtutCRLQrePszki8uP0CtYmca6N8MijuG7GADbPH22GhrpNoDm5aSXmuczjRyg==", "kind"=>{"description"=>"Amigo"}, "commit"=>"Create Kind"}
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+  [1m[36mKind Create (0.8ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "Amigo"], ["created_at", "2023-12-03 18:13:00.016554"], ["updated_at", "2023-12-03 18:13:00.016554"]]
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/kinds_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/kinds/2
+Completed 302 Found in 9ms (ActiveRecord: 3.5ms | Allocations: 2803)
+
+
+Started GET "/kinds/2" for ::1 at 2023-12-03 18:13:00 +0000
+Processing by KindsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mKind Load (1.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/kinds_controller.rb:63:in `set_kind'
+  Rendering kinds/show.html.erb within layouts/application
+  Rendered kinds/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 98)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 1.1ms | Allocations: 4409)
+
+
+Started GET "/kinds" for ::1 at 2023-12-03 18:13:02 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (0.8ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1011)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.8ms | Allocations: 4746)
+
+
+Started GET "/home" for ::1 at 2023-12-03 21:30:46 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/homes" for ::1 at 2023-12-03 21:30:50 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/homes"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/index" for ::1 at 2023-12-03 21:30:55 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home" for ::1 at 2023-12-03 21:31:00 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2023-12-03 21:32:11 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/caixeta/.rvm/gems/ruby-2.7.0/gems/railties-6.0.6.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/caixeta/.rvm/gems/ruby-2.7.0/gems/railties-6.0.6.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.5ms | Allocations: 182)
+Completed 200 OK in 10ms (Views: 8.1ms | ActiveRecord: 0.0ms | Allocations: 1002)
+
+
+Started GET "/homes" for ::1 at 2023-12-03 21:37:09 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/homes"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home" for ::1 at 2023-12-03 21:37:13 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/home"):
+  
+actionpack (6.0.6.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.6.1) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.6.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.6.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.8) lib/rack/method_override.rb:24:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.6.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.6.1) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+webpacker (4.3.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.7.7) lib/rack/proxy.rb:87:in `call'
+railties (6.0.6.1) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/home/index" for ::1 at 2023-12-03 21:37:45 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 286)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.9ms | ActiveRecord: 0.0ms | Allocations: 4960)
+
+
+Started GET "/kinds" for ::1 at 2023-12-03 21:37:52 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (2.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 7.7ms | Allocations: 1330)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 13ms (Views: 9.7ms | ActiveRecord: 2.6ms | Allocations: 5652)
+
+
+Started GET "/" for ::1 at 2023-12-03 21:40:05 +0000
+  
+ArgumentError (Missing :controller key on routes definition, please check your routes.):
+  
+config/routes.rb:2:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/" for ::1 at 2023-12-03 21:44:15 +0000
+  
+NameError (undefined local variable or method `home' for #<ActionDispatch::Routing::Mapper:0x00007f38200afa28>):
+  
+config/routes.rb:3:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/" for ::1 at 2023-12-03 21:44:20 +0000
+  
+NameError (undefined local variable or method `home' for #<ActionDispatch::Routing::Mapper:0x0000556205477400>):
+  
+config/routes.rb:3:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/" for ::1 at 2023-12-03 21:44:41 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 143)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 3987)
+
+
+Started GET "/home/index" for ::1 at 2023-12-06 22:06:41 +0000
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 422)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 29.2ms | ActiveRecord: 0.0ms | Allocations: 10197)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:06:43 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (3.9ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 9.6ms | Allocations: 1485)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 8.7ms | ActiveRecord: 5.9ms | Allocations: 6989)
+
+
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:06:44 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (Duration: 9.5ms | Allocations: 4515)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 10.5ms | Allocations: 4833)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 13.1ms | Allocations: 9284)
+
+
+  
+ActionView::Template::Error (undefined method `map' for :contact:Symbol
+Did you mean?  tap):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= options_from_collection_for_select(:contact, :kinds, :id, :description) %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/contacts/_form.html.erb:25
+app/views/contacts/_form.html.erb:1
+app/views/contacts/new.html.erb:3
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:09:08 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (Duration: 3.4ms | Allocations: 1976)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 4.2ms | Allocations: 2286)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 3580)
+
+
+  
+ActionView::Template::Error (wrong number of arguments (given 4, expected 5..7)):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= collection_select(:contact, :kinds, :id, :description) %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/contacts/_form.html.erb:25
+app/views/contacts/_form.html.erb:1
+app/views/contacts/new.html.erb:3
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:12:41 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  Rendered contacts/_form.html.erb (Duration: 21.8ms | Allocations: 5537)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 23.3ms | Allocations: 5846)
+Completed 500 Internal Server Error in 29ms (ActiveRecord: 0.0ms | Allocations: 7088)
+
+
+  
+ActionView::Template::Error (undefined method `map' for :kinds:Symbol
+Did you mean?  tap):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= collection_select(:contact, :kind_id, :kinds, :id, :description) %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/contacts/_form.html.erb:25
+app/views/contacts/_form.html.erb:1
+app/views/contacts/new.html.erb:3
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:12:50 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  [1m[36mKind Load (8.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1[0m  [["LIMIT", 11]]
+  ↳ app/views/contacts/new.html.erb:3
+  Rendered contacts/_form.html.erb (Duration: 291.9ms | Allocations: 136815)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 292.9ms | Allocations: 137125)
+Completed 500 Internal Server Error in 295ms (ActiveRecord: 15.2ms | Allocations: 138377)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `kinds' for #<#<Class:0x00007f24fc070c10>:0x00007f24fc068cb8>
+Did you mean?  @kinds):
+    22:   </div>
+    23: 
+    24:   <div class="field">
+    25:     <%= collection_select(:contact, :kind_id, kinds, :id, :description) %>
+    26:   </div>
+    27: 
+    28:   <div class="field">
+  
+app/views/contacts/_form.html.erb:25
+app/views/contacts/_form.html.erb:1
+app/views/contacts/new.html.erb:3
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:15:05 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  [1m[36mKind Load (1.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/contacts/_form.html.erb:25
+  Rendered contacts/_form.html.erb (Duration: 15.7ms | Allocations: 5475)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 16.9ms | Allocations: 5813)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 27.1ms | ActiveRecord: 1.0ms | Allocations: 10425)
+
+
+Started POST "/contacts" for ::1 at 2023-12-06 22:15:28 +0000
+Processing by ContactsController#create as HTML
+  Parameters: {"authenticity_token"=>"tVtxPK+MMRN578p2l9WVcwygYERE0SErNw94krSI4V0HaOu8MDQQJ1OeJhzH8jCe7sfgnjYDg+j1SPyXE5tGUQ==", "contact"=>{"name"=>"test", "email"=>"test@mail.com", "kind_id"=>"2", "rmk"=>"something"}, "commit"=>"Create Contact"}
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/contacts_controller.rb:28:in `block in create'
+  [1m[36mKind Load (1.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:28:in `block in create'
+  [1m[36mContact Create (4.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "test"], ["email", "test@mail.com"], ["kind_id", 2], ["rmk", "something"], ["created_at", "2023-12-06 22:15:28.662371"], ["updated_at", "2023-12-06 22:15:28.662371"]]
+  ↳ app/controllers/contacts_controller.rb:28:in `block in create'
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/contacts_controller.rb:28:in `block in create'
+Redirected to http://localhost:3000/contacts/1
+Completed 302 Found in 33ms (ActiveRecord: 9.2ms | Allocations: 7755)
+
+
+Started GET "/contacts/1" for ::1 at 2023-12-06 22:15:28 +0000
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (1.0ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:64:in `set_contact'
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 317)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 6.7ms | ActiveRecord: 1.0ms | Allocations: 4887)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:15:32 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.9ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 3.9ms | Allocations: 1142)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 12.8ms | ActiveRecord: 0.9ms | Allocations: 5030)
+
+
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:19:45 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  [1m[36mKind Load (0.9ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/contacts/_form.html.erb:25
+  Rendered contacts/_form.html.erb (Duration: 4.6ms | Allocations: 1904)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1995)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 12.3ms | ActiveRecord: 0.9ms | Allocations: 5728)
+
+
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:23:22 +0000
+Processing by ContactsController#new as HTML
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 5.7ms | Allocations: 6761)
+
+
+  
+NameError (uninitialized constant ContactsController::Kinds):
+  
+app/controllers/contacts_controller.rb:64:in `get_kinds_for_select'
+app/controllers/contacts_controller.rb:16:in `new'
+Started GET "/contacts/new" for ::1 at 2023-12-06 22:24:29 +0000
+Processing by ContactsController#new as HTML
+  Rendering contacts/new.html.erb within layouts/application
+  [1m[36mKind Load (1.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/contacts/_form.html.erb:25
+  Rendered contacts/_form.html.erb (Duration: 13.7ms | Allocations: 4018)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 14.3ms | Allocations: 4110)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 17.5ms | ActiveRecord: 8.1ms | Allocations: 12335)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:24:31 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.8ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 874)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.8ms | Allocations: 4628)
+
+
+Started GET "/contacts/1/edit" for ::1 at 2023-12-06 22:24:34 +0000
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (1.1ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:68:in `set_contact'
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mKind Load (1.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/contacts/_form.html.erb:25
+  Rendered contacts/_form.html.erb (Duration: 5.4ms | Allocations: 2021)
+  Rendered contacts/edit.html.erb within layouts/application (Duration: 13.1ms | Allocations: 2281)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 21ms (Views: 15.4ms | ActiveRecord: 2.4ms | Allocations: 6844)
+
+
+Started PATCH "/contacts/1" for ::1 at 2023-12-06 22:24:37 +0000
+Processing by ContactsController#update as HTML
+  Parameters: {"authenticity_token"=>"abqaAdGcFhfzwFUBiB37hIu7K0di9/fWCLaMQZwZmZWTi4ctgFbEOnsHnYTj7PnwZhbyhoFZdQr6RE4LHYu8kQ==", "contact"=>{"name"=>"test", "email"=>"test@mail.com", "kind_id"=>"1", "rmk"=>"something"}, "commit"=>"Update Contact", "id"=>"1"}
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:68:in `set_contact'
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/contacts_controller.rb:42:in `block in update'
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:42:in `block in update'
+  [1m[36mContact Update (2.9ms)[0m  [1m[33mUPDATE "contacts" SET "kind_id" = $1, "updated_at" = $2 WHERE "contacts"."id" = $3[0m  [["kind_id", 1], ["updated_at", "2023-12-06 22:24:37.331046"], ["id", 1]]
+  ↳ app/controllers/contacts_controller.rb:42:in `block in update'
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/contacts_controller.rb:42:in `block in update'
+Redirected to http://localhost:3000/contacts/1
+Completed 302 Found in 19ms (ActiveRecord: 6.6ms | Allocations: 5651)
+
+
+Started GET "/contacts/1" for ::1 at 2023-12-06 22:24:37 +0000
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mContact Load (1.8ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/contacts_controller.rb:68:in `set_contact'
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 108)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 6.4ms | ActiveRecord: 1.8ms | Allocations: 4405)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:24:39 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (1.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 3.3ms | Allocations: 859)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 1.5ms | Allocations: 4595)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:35:47 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (1.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 6.1ms | Allocations: 2553)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 1.6ms | Allocations: 3775)
+
+
+  
+ActionView::Template::Error (Missing partial views/shared/_footer with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :jbuilder]}. Searched in:
+  * "/home/caixeta/documents/ruby-course/agenda/app/views"
+  * "/home/caixeta/.rvm/gems/ruby-2.7.0/gems/actiontext-6.0.6.1/app/views"
+  * "/home/caixeta/.rvm/gems/ruby-2.7.0/gems/actionmailbox-6.0.6.1/app/views"
+):
+    32: 
+    33: <%= link_to 'New Contact', new_contact_path %>
+    34: 
+    35: <%= render '/views/shared/footer'%>
+  
+app/views/contacts/index.html.erb:35
+Started GET "/contacts" for ::1 at 2023-12-06 22:36:01 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (1.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 150.1ms | Allocations: 66034)
+Completed 500 Internal Server Error in 153ms (ActiveRecord: 1.5ms | Allocations: 67256)
+
+
+  
+ActionView::Template::Error (undefined method `partial' for #<#<Class:0x00007f250005d6e8>:0x00007f250004f818>):
+    32: 
+    33: <%= link_to 'New Contact', new_contact_path %>
+    34: 
+    35: <%= render partial '/views/shared/footer'%>
+  
+app/views/contacts/index.html.erb:35
+Started GET "/contacts" for ::1 at 2023-12-06 22:36:30 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.9ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered contacts/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 2471)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.9ms | Allocations: 3693)
+
+
+  
+ActionView::Template::Error (Missing partial views/shared/_footer with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :jbuilder]}. Searched in:
+  * "/home/caixeta/documents/ruby-course/agenda/app/views"
+  * "/home/caixeta/.rvm/gems/ruby-2.7.0/gems/actiontext-6.0.6.1/app/views"
+  * "/home/caixeta/.rvm/gems/ruby-2.7.0/gems/actionmailbox-6.0.6.1/app/views"
+):
+    32: 
+    33: <%= link_to 'New Contact', new_contact_path %>
+    34: 
+    35: <%= render partial:'/views/shared/footer' %>
+  
+app/views/contacts/index.html.erb:35
+Started GET "/contacts" for ::1 at 2023-12-06 22:37:04 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (1.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered shared/_footer.html.erb (Duration: 0.4ms | Allocations: 86)
+  Rendered contacts/index.html.erb within layouts/application (Duration: 6.2ms | Allocations: 1443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 10.7ms | ActiveRecord: 1.4ms | Allocations: 6113)
+
+
+Started GET "/contacts" for ::1 at 2023-12-06 22:37:31 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:17
+  Rendered shared/_footer.html.erb (Duration: 0.3ms | Allocations: 82)
+  Rendered contacts/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1432)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 0.6ms | Allocations: 6081)
+
+
