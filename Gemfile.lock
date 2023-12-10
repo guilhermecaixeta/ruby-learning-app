@@ -77,6 +77,8 @@ GEM
     date (3.3.4)
     date (3.3.4-java)
     erubi (1.12.0)
+    faker (3.2.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     ffi (1.16.3-java)
     ffi (1.16.3-x64-mingw32)
@@ -250,6 +252,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)

@@ -48,3 +48,1081 @@ FOREIGN KEY ("contact_id")
   [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[35m (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "schema_sha1"]]
   [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (33.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "agenda_test"[0m
+  [1m[35m (80.0ms)[0m  [1m[35mCREATE DATABASE "agenda_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:12.655027"], ["updated_at", "2023-12-09 18:04:12.655027"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:12.659972"], ["updated_at", "2023-12-09 18:04:12.659972"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (54.2ms)[0m  [1m[35mCREATE DATABASE "agenda_test-1" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (42.3ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (134.7ms)[0m  [1m[35mCREATE DATABASE "agenda_test-4" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (142.4ms)[0m  [1m[35mCREATE DATABASE "agenda_test-6" ENCODING = 'unicode'[0m
+  [1m[35m (145.2ms)[0m  [1m[35mCREATE DATABASE "agenda_test-7" ENCODING = 'unicode'[0m
+  [1m[35m (11.2ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (144.5ms)[0m  [1m[35mCREATE DATABASE "agenda_test-2" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (173.0ms)[0m  [1m[35mCREATE DATABASE "agenda_test-0" ENCODING = 'unicode'[0m
+  [1m[35m (25.9ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (12.0ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (174.3ms)[0m  [1m[35mCREATE DATABASE "agenda_test-5" ENCODING = 'unicode'[0m
+  [1m[35m (171.2ms)[0m  [1m[35mCREATE DATABASE "agenda_test-3" ENCODING = 'unicode'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (10.9ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses" CASCADE[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "contacts" CASCADE[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (10.3ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (5.1ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "kinds" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "phones" CASCADE[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:12.990763"], ["updated_at", "2023-12-09 18:04:12.990763"]]
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.002160"], ["updated_at", "2023-12-09 18:04:13.002160"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "addresses" ADD CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "phones" ADD CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.011150"], ["updated_at", "2023-12-09 18:04:13.011150"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.016915"], ["updated_at", "2023-12-09 18:04:13.016915"]]
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.017418"], ["updated_at", "2023-12-09 18:04:13.017418"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.020378"], ["updated_at", "2023-12-09 18:04:13.020378"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.019987"], ["updated_at", "2023-12-09 18:04:13.019987"]]
+  [1m[35m (2.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231201201634)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231201201245),
+(20231201201411),
+(20231201201454);
+
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (2.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.026171"], ["updated_at", "2023-12-09 18:04:13.026171"]]
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.027144"], ["updated_at", "2023-12-09 18:04:13.027144"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.027581"], ["updated_at", "2023-12-09 18:04:13.027581"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (6.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (9.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.047216"], ["updated_at", "2023-12-09 18:04:13.047216"]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.049598"], ["updated_at", "2023-12-09 18:04:13.049598"]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-12-09 18:04:13.051280"], ["updated_at", "2023-12-09 18:04:13.051280"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.055974"], ["updated_at", "2023-12-09 18:04:13.055974"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.059616"], ["updated_at", "2023-12-09 18:04:13.059616"]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "1d6e709229c1ccff752c7cfe877d72ff7c4b5e3f"], ["created_at", "2023-12-09 18:04:13.061216"], ["updated_at", "2023-12-09 18:04:13.061216"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.047695', '2023-12-09 18:04:13.047695'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.047695', '2023-12-09 18:04:13.047695');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.055639', '2023-12-09 18:04:13.055639'), (298486374, 'MyString', '2023-12-09 18:04:13.055639', '2023-12-09 18:04:13.055639');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.059544', '2023-12-09 18:04:13.059544'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.059544', '2023-12-09 18:04:13.059544');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.063066', '2023-12-09 18:04:13.063066'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.063066', '2023-12-09 18:04:13.063066')[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (3.6ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.056709', '2023-12-09 18:04:13.056709'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.056709', '2023-12-09 18:04:13.056709');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.064292', '2023-12-09 18:04:13.064292'), (298486374, 'MyString', '2023-12-09 18:04:13.064292', '2023-12-09 18:04:13.064292');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.069252', '2023-12-09 18:04:13.069252'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.069252', '2023-12-09 18:04:13.069252');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.072536', '2023-12-09 18:04:13.072536'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.072536', '2023-12-09 18:04:13.072536')[0m
+  [1m[35m (3.0ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.055688', '2023-12-09 18:04:13.055688'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.055688', '2023-12-09 18:04:13.055688');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.063768', '2023-12-09 18:04:13.063768'), (298486374, 'MyString', '2023-12-09 18:04:13.063768', '2023-12-09 18:04:13.063768');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.067424', '2023-12-09 18:04:13.067424'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.067424', '2023-12-09 18:04:13.067424');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.072958', '2023-12-09 18:04:13.072958'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.072958', '2023-12-09 18:04:13.072958')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.5ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.064909', '2023-12-09 18:04:13.064909'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.064909', '2023-12-09 18:04:13.064909');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.072216', '2023-12-09 18:04:13.072216'), (298486374, 'MyString', '2023-12-09 18:04:13.072216', '2023-12-09 18:04:13.072216');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.076285', '2023-12-09 18:04:13.076285'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.076285', '2023-12-09 18:04:13.076285');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.080939', '2023-12-09 18:04:13.080939'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.080939', '2023-12-09 18:04:13.080939')[0m
+  [1m[35m (3.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.068075', '2023-12-09 18:04:13.068075'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.068075', '2023-12-09 18:04:13.068075');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.076262', '2023-12-09 18:04:13.076262'), (298486374, 'MyString', '2023-12-09 18:04:13.076262', '2023-12-09 18:04:13.076262');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.082016', '2023-12-09 18:04:13.082016'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.082016', '2023-12-09 18:04:13.082016');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.086927', '2023-12-09 18:04:13.086927'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.086927', '2023-12-09 18:04:13.086927')[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ContactsControllerTest: test_should_show_contact
+------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+HomeControllerTest: test_should_get_index
+-----------------------------------------
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ContactsControllerTest: test_should_destroy_contact
+---------------------------------------------------
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ContactsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (2.6ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.089184', '2023-12-09 18:04:13.089184'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.089184', '2023-12-09 18:04:13.089184');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.104042', '2023-12-09 18:04:13.104042'), (298486374, 'MyString', '2023-12-09 18:04:13.104042', '2023-12-09 18:04:13.104042');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.110811', '2023-12-09 18:04:13.110811'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.110811', '2023-12-09 18:04:13.110811');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.117857', '2023-12-09 18:04:13.117857'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.117857', '2023-12-09 18:04:13.117857')[0m
+  [1m[35m (3.2ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL;ALTER TABLE "contacts" DISABLE TRIGGER ALL;ALTER TABLE "addresses" DISABLE TRIGGER ALL;ALTER TABLE "kinds" DISABLE TRIGGER ALL;ALTER TABLE "phones" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (3.8ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.098806', '2023-12-09 18:04:13.098806'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.098806', '2023-12-09 18:04:13.098806');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.112803', '2023-12-09 18:04:13.112803'), (298486374, 'MyString', '2023-12-09 18:04:13.112803', '2023-12-09 18:04:13.112803');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.118211', '2023-12-09 18:04:13.118211'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.118211', '2023-12-09 18:04:13.118211');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.123485', '2023-12-09 18:04:13.123485'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.123485', '2023-12-09 18:04:13.123485')[0m
+  [1m[35m (2.1ms)[0m  [1m[31mDELETE FROM "phones";
+DELETE FROM "kinds";
+DELETE FROM "addresses";
+DELETE FROM "contacts";
+INSERT INTO "phones" ("id", "phone", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 980190962, '2023-12-09 18:04:13.094632', '2023-12-09 18:04:13.094632'), (298486374, 'MyString', 298486374, '2023-12-09 18:04:13.094632', '2023-12-09 18:04:13.094632');
+INSERT INTO "kinds" ("id", "description", "created_at", "updated_at") VALUES (980190962, 'MyString', '2023-12-09 18:04:13.108681', '2023-12-09 18:04:13.108681'), (298486374, 'MyString', '2023-12-09 18:04:13.108681', '2023-12-09 18:04:13.108681');
+INSERT INTO "addresses" ("id", "street", "city", "state", "contact_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 'MyString', 980190962, '2023-12-09 18:04:13.115901', '2023-12-09 18:04:13.115901'), (298486374, 'MyString', 'MyString', 'MyString', 298486374, '2023-12-09 18:04:13.115901', '2023-12-09 18:04:13.115901');
+INSERT INTO "contacts" ("id", "name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, 'MyText', '2023-12-09 18:04:13.122035', '2023-12-09 18:04:13.122035'), (298486374, 'MyString', 'MyString', 298486374, 'MyText', '2023-12-09 18:04:13.122035', '2023-12-09 18:04:13.122035')[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+-------------------------------------------
+ContactsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL;ALTER TABLE "contacts" ENABLE TRIGGER ALL;ALTER TABLE "addresses" ENABLE TRIGGER ALL;ALTER TABLE "kinds" ENABLE TRIGGER ALL;ALTER TABLE "phones" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ContactsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ContactsControllerTest: test_should_update_contact
+--------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ContactsControllerTest: test_should_create_contact
+--------------------------------------------------
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/home/index" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/contacts/980190962" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Started GET "/contacts/new" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Processing by HomeController#index as HTML
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+Started GET "/contacts" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Processing by ContactsController#new as HTML
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started DELETE "/contacts/980190962" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Started GET "/contacts/980190962/edit" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by ContactsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered shared/_header.html.erb (Duration: 0.3ms | Allocations: 79)
+  Rendered shared/_footer.html.erb (Duration: 0.3ms | Allocations: 85)
+  Rendered home/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1030)
+  [1m[36mContact Load (0.8ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/contacts/980190962" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+Processing by ContactsController#index as HTML
+  Rendering contacts/show.html.erb within layouts/application
+  Rendered contacts/show.html.erb within layouts/application (Duration: 2.7ms | Allocations: 534)
+  Rendering contacts/new.html.erb within layouts/application
+Started POST "/contacts" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Processing by ContactsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mKind Load (0.9ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendered contacts/_form.html.erb (Duration: 11.5ms | Allocations: 5656)
+  Rendered contacts/new.html.erb within layouts/application (Duration: 12.6ms | Allocations: 6081)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+Processing by ContactsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mContact Destroy (2.7ms)[0m  [1m[31mDELETE FROM "contacts" WHERE "contacts"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 4.2ms | Allocations: 1938)
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by ContactsController#update as HTML
+  Parameters: {"contact"=>{"email"=>"MyString", "kind_id"=>"980190962", "name"=>"MyString", "rmk"=>"MyText"}, "id"=>"980190962"}
+  Rendered shared/_footer.html.erb (Duration: 0.4ms | Allocations: 86)
+  Rendered contacts/index.html.erb within layouts/application (Duration: 5.6ms | Allocations: 1335)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+PhonesControllerTest: test_should_show_phone
+--------------------------------------------
+  Rendering contacts/edit.html.erb within layouts/application
+  [1m[36mPhone Load (0.8ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mContact Load (1.0ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by ContactsController#create as HTML
+  Parameters: {"contact"=>{"email"=>"MyString", "kind_id"=>"980190962", "name"=>"MyString", "rmk"=>"MyText"}}
+Started GET "/phones/980190962" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+  [1m[36mKind Load (0.8ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by PhonesController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  Rendered contacts/_form.html.erb (Duration: 16.5ms | Allocations: 5716)
+  Rendered contacts/edit.html.erb within layouts/application (Duration: 18.0ms | Allocations: 6142)
+  [1m[36mPhone Load (1.1ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/contacts/980190962
+Completed 302 Found in 27ms (ActiveRecord: 3.2ms | Allocations: 5633)
+  Rendering phones/show.html.erb within layouts/application
+  Rendered phones/show.html.erb within layouts/application (Duration: 2.3ms | Allocations: 437)
+  [1m[36mContact Create (1.2ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "MyString"], ["email", "MyString"], ["kind_id", 980190962], ["rmk", "MyText"], ["created_at", "2023-12-09 18:04:13.306041"], ["updated_at", "2023-12-09 18:04:13.306041"]]
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/contacts/980190963
+Completed 302 Found in 23ms (ActiveRecord: 3.0ms | Allocations: 5627)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------------
+PhonesControllerTest: test_should_destroy_phone
+-----------------------------------------------
+  [1m[36mPhone Load (0.8ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "phones"[0m
+Started DELETE "/phones/980190962" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+PhonesControllerTest: test_should_get_new
+-----------------------------------------
+  [1m[36mPhone Load (0.5ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by PhonesController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+Started GET "/phones/new" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+Processing by PhonesController#new as HTML
+  Rendering phones/new.html.erb within layouts/application
+  [1m[36mPhone Load (13.0ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mPhone Destroy (0.5ms)[0m  [1m[31mDELETE FROM "phones" WHERE "phones"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/phones
+Completed 302 Found in 18ms (ActiveRecord: 14.2ms | Allocations: 697)
+  Rendered phones/_form.html.erb (Duration: 6.1ms | Allocations: 2782)
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "phones"[0m
+  Rendered phones/new.html.erb within layouts/application (Duration: 7.7ms | Allocations: 3257)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+[Webpacker] Compiling...
+[Webpacker] Compiling...
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+PhonesControllerTest: test_should_get_edit
+------------------------------------------
+  [1m[36mPhone Load (0.5ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/phones/980190962/edit" for 127.0.0.1 at 2023-12-09 18:04:13 +0000
+[Webpacker] Compiling...
+Processing by PhonesController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mPhone Load (0.7ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering phones/edit.html.erb within layouts/application
+[Webpacker] Compiling...
+[Webpacker] Compiling...
+  Rendered phones/_form.html.erb (Duration: 8.4ms | Allocations: 2864)
+  Rendered phones/edit.html.erb within layouts/application (Duration: 10.3ms | Allocations: 3398)
+[Webpacker] Compiling...
+[Webpacker] Compiling...
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 948ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 939ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+Completed 200 OK in 2579ms (Views: 2553.6ms | ActiveRecord: 0.9ms | Allocations: 33276)
+Completed 200 OK in 2512ms (Views: 2505.4ms | ActiveRecord: 1.1ms | Allocations: 23106)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 938ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 950ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+PhonesControllerTest: test_should_get_index
+-------------------------------------------
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 955ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+  [1m[36mPhone Load (0.9ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Completed 200 OK in 2583ms (Views: 2573.2ms | ActiveRecord: 0.8ms | Allocations: 31146)
+Completed 200 OK in 2574ms (Views: 2548.2ms | ActiveRecord: 0.7ms | Allocations: 26771)
+Started GET "/phones" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+Processing by PhonesController#index as HTML
+Completed 200 OK in 2465ms (Views: 2460.9ms | ActiveRecord: 0.7ms | Allocations: 26248)
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 965ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+  Rendering phones/index.html.erb within layouts/application
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+PhonesControllerTest: test_should_update_phone
+----------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mPhone Load (0.4ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mPhone Load (0.9ms)[0m  [1m[34mSELECT "phones".* FROM "phones"[0m
+Completed 200 OK in 2617ms (Views: 2593.1ms | ActiveRecord: 0.0ms | Allocations: 32481)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+KindsControllerTest: test_should_show_kind
+------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------
+PhonesControllerTest: test_should_create_phone
+----------------------------------------------
+  Rendered phones/index.html.erb within layouts/application (Duration: 5.7ms | Allocations: 800)
+  [1m[36mPhone Load (0.6ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "phones"[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 971ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+---------------------------------------------
+KindsControllerTest: test_should_destroy_kind
+---------------------------------------------
+Started GET "/kinds/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+Started POST "/phones" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------
+KindsControllerTest: test_should_get_new
+----------------------------------------
+Completed 200 OK in 2568ms (Views: 2557.1ms | ActiveRecord: 1.3ms | Allocations: 29761)
+Processing by PhonesController#create as HTML
+  Parameters: {"phone"=>{"contact_id"=>"980190962", "phone"=>"MyString"}}
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/phones/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[35m (0.9ms)[0m  [1m[31mROLLBACK[0m
+Processing by KindsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+-----------------------------------------
+KindsControllerTest: test_should_get_edit
+-----------------------------------------
+  [1m[36mContact Load (0.8ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+[Webpacker] Compiled all packs in /home/caixeta/documents/ruby-course/agenda/public/packs-test
+[Webpacker] Hash: 45dee82af4837d900c4c
+Version: webpack 4.47.0
+Time: 983ms
+Built at: 12/09/2023 6:04:15 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-a9e583f49e9926309751.js    120 KiB  application  [emitted] [immutable]  application
+js/application-a9e583f49e9926309751.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-a9e583f49e9926309751.js js/application-a9e583f49e9926309751.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mKind Load (1.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mPhone Create (1.0ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "MyString"], ["contact_id", 980190962], ["created_at", "2023-12-09 18:04:15.844187"], ["updated_at", "2023-12-09 18:04:15.844187"]]
+Completed 200 OK in 26ms (Views: 24.1ms | ActiveRecord: 0.9ms | Allocations: 3605)
+  [1m[36mKind Load (1.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (1.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Completed 200 OK in 2513ms (Views: 2510.6ms | ActiveRecord: 0.0ms | Allocations: 26031)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+Redirected to http://www.example.com/phones/980190963
+Completed 302 Found in 12ms (ActiveRecord: 3.2ms | Allocations: 1217)
+  Rendering kinds/show.html.erb within layouts/application
+Started GET "/kinds/980190962/edit" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  Rendered kinds/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 243)
+Started GET "/kinds/new" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+Processing by PhonesController#update as HTML
+  Parameters: {"phone"=>{"contact_id"=>"980190962", "phone"=>"MyString"}, "id"=>"980190962"}
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+KindsControllerTest: test_should_get_index
+------------------------------------------
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "phones"[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "kinds"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPhone Load (0.5ms)[0m  [1m[34mSELECT "phones".* FROM "phones" ORDER BY "phones"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+--------------------------------------------
+KindsControllerTest: test_should_update_kind
+--------------------------------------------
+Processing by KindsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started DELETE "/kinds/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mPhone Load (0.9ms)[0m  [1m[34mSELECT "phones".* FROM "phones" WHERE "phones"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+Processing by KindsController#new as HTML
+  [1m[36mKind Load (0.8ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+[Webpacker] Everything's up-to-date. Nothing to do
+Started PATCH "/kinds/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+Completed 200 OK in 21ms (Views: 14.4ms | ActiveRecord: 1.7ms | Allocations: 3758)
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mKind Load (4.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+--------------------------------------------
+KindsControllerTest: test_should_create_kind
+--------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering kinds/new.html.erb within layouts/application
+  Rendering kinds/edit.html.erb within layouts/application
+Started GET "/kinds" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "kinds"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+Started POST "/kinds" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Processing by KindsController#update as HTML
+-------------------------------------------------
+AddressesControllerTest: test_should_show_address
+  Parameters: {"kind"=>{"description"=>"MyString"}, "id"=>"980190962"}
+-------------------------------------------------
+Processing by KindsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35m (0.7ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/phones/980190962
+Completed 302 Found in 19ms (ActiveRecord: 2.7ms | Allocations: 2499)
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mAddress Load (0.7ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendered kinds/_form.html.erb (Duration: 6.4ms | Allocations: 989)
+Processing by KindsController#index as HTML
+  Rendered kinds/edit.html.erb within layouts/application (Duration: 8.5ms | Allocations: 1259)
+Redirected to http://www.example.com/kinds/980190962
+Completed 302 Found in 5ms (ActiveRecord: 0.7ms | Allocations: 706)
+Processing by KindsController#create as HTML
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  Parameters: {"kind"=>{"description"=>"MyString"}}
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mKind Destroy (1.2ms)[0m  [1m[31mDELETE FROM "kinds" WHERE "kinds"."id" = $1[0m  [["id", 980190962]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering kinds/index.html.erb within layouts/application
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 2.7ms | Allocations: 746)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+----------------------------------------------------
+AddressesControllerTest: test_should_destroy_address
+----------------------------------------------------
+  Rendered kinds/_form.html.erb (Duration: 12.4ms | Allocations: 2502)
+  Rendered kinds/new.html.erb within layouts/application (Duration: 14.4ms | Allocations: 2780)
+  [1m[36mKind Load (0.6ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  [1m[36mKind Create (0.8ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "MyString"], ["created_at", "2023-12-09 18:04:15.876486"], ["updated_at", "2023-12-09 18:04:15.876486"]]
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+AddressesControllerTest: test_should_get_new
+--------------------------------------------
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[35m (0.4ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendered kinds/index.html.erb within layouts/application (Duration: 4.3ms | Allocations: 768)
+Redirected to http://www.example.com/kinds/980190963
+Completed 302 Found in 6ms (ActiveRecord: 1.6ms | Allocations: 736)
+Completed 200 OK in 26ms (Views: 19.1ms | ActiveRecord: 4.1ms | Allocations: 4759)
+  [1m[36mAddress Load (0.7ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+AddressesControllerTest: test_should_get_edit
+---------------------------------------------
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mAddress Load (0.7ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "kinds"[0m
+  [1m[36mAddress Load (0.6ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mKind Load (0.8ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" ORDER BY "kinds"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+[Webpacker] Everything's up-to-date. Nothing to do
+----------------------------------------------
+AddressesControllerTest: test_should_get_index
+----------------------------------------------
+Started GET "/addresses/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 14.8ms | ActiveRecord: 0.6ms | Allocations: 4071)
+Completed 200 OK in 32ms (Views: 27.9ms | ActiveRecord: 0.0ms | Allocations: 6081)
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mAddress Load (1.0ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+Processing by AddressesController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+AddressesControllerTest: test_should_update_address
+---------------------------------------------------
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+AddressesControllerTest: test_should_create_address
+---------------------------------------------------
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "addresses"[0m
+  [1m[36mAddress Load (1.0ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mAddress Load (0.9ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started DELETE "/addresses/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mAddress Load (0.7ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/addresses/new" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  Rendering addresses/show.html.erb within layouts/application
+  Rendered addresses/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 314)
+Started GET "/addresses/980190962/edit" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+Processing by AddressesController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+Processing by AddressesController#new as HTML
+  [1m[36mAddress Load (1.8ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Processing by AddressesController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  Rendering addresses/new.html.erb within layouts/application
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 79)
+Started GET "/addresses" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mAddress Destroy (0.7ms)[0m  [1m[31mDELETE FROM "addresses" WHERE "addresses"."id" = $1[0m  [["id", 980190962]]
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mAddress Load (0.4ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/addresses
+Completed 302 Found in 9ms (ActiveRecord: 3.6ms | Allocations: 703)
+Completed 200 OK in 20ms (Views: 15.2ms | ActiveRecord: 1.0ms | Allocations: 3831)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  Rendering addresses/edit.html.erb within layouts/application
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "addresses"[0m
+Processing by AddressesController#index as HTML
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "addresses"[0m
+  Rendered shared/_header.html.erb (Duration: 0.3ms | Allocations: 79)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+Started PATCH "/addresses/980190962" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  Rendered addresses/_form.html.erb (Duration: 8.0ms | Allocations: 1825)
+  Rendering addresses/index.html.erb within layouts/application
+  Rendered shared/_footer.html.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered addresses/new.html.erb within layouts/application (Duration: 13.9ms | Allocations: 2671)
+Processing by AddressesController#update as HTML
+  Parameters: {"address"=>{"city"=>"MyString", "contact_id"=>"980190962", "state"=>"MyString", "street"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mAddress Load (1.2ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses"[0m
+Started POST "/addresses" for 127.0.0.1 at 2023-12-09 18:04:15 +0000
+  [1m[36mAddress Load (1.1ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendered addresses/index.html.erb within layouts/application (Duration: 5.5ms | Allocations: 859)
+  [1m[35m (1.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/addresses/980190962
+Completed 302 Found in 9ms (ActiveRecord: 3.6ms | Allocations: 1346)
+Processing by AddressesController#create as HTML
+  Parameters: {"address"=>{"city"=>"MyString", "contact_id"=>"980190962", "state"=>"MyString", "street"=>"MyString"}}
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered addresses/_form.html.erb (Duration: 18.0ms | Allocations: 3471)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered addresses/edit.html.erb within layouts/application (Duration: 22.3ms | Allocations: 4101)
+Completed 200 OK in 21ms (Views: 16.8ms | ActiveRecord: 1.2ms | Allocations: 4170)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 32.6ms | ActiveRecord: 0.0ms | Allocations: 5968)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 33.8ms | ActiveRecord: 0.4ms | Allocations: 7623)
+  [1m[36mContact Load (0.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" WHERE "contacts"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mAddress Create (1.2ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "MyString"], ["city", "MyString"], ["state", "MyString"], ["contact_id", 980190962], ["created_at", "2023-12-09 18:04:15.965583"], ["updated_at", "2023-12-09 18:04:15.965583"]]
+  [1m[35m (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/addresses/980190963
+Completed 302 Found in 32ms (ActiveRecord: 3.2ms | Allocations: 5993)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "addresses"[0m
+  [1m[36mAddress Load (0.6ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" ORDER BY "addresses"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m

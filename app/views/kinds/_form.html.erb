@@ -1,6 +1,6 @@
-<%= form_with(model: kind, local: true) do |form| %>
+<%= form_with(model: kind, local: true, class: "basic-grey") do |form| %>
   <% if kind.errors.any? %>
-    <div id="error_explanation">
+    <section id="error_explanation">
       <h2><%= pluralize(kind.errors.count, "error") %> prohibited this kind from being saved:</h2>
 
       <ul>
@@ -8,15 +8,20 @@
           <li><%= message %></li>
         <% end %>
       </ul>
-    </div>
+    </section>
   <% end %>
 
-  <div class="field">
+  <section class="field">
     <%= form.label :description %>
     <%= form.text_field :description %>
-  </div>
+  </section>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <section class="actions">
+    <% if action_name == 'new' %>
+      <%= form.submit "Send", class: "button" %>
+    <% else %>
+      <%= link_to 'Show', @kind, class: "button" %>
+    <% end %>
+    <%= link_to 'Back', kinds_path, class: "button" %>
+  </section>
 <% end %>

@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "Generating kinds"
+Kind.create!([{description: "Friend"}, {description: "Business"}, {description: "Contact"}])
+
+puts "Finalizing seeding..."
