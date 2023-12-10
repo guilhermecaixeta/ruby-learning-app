@@ -5,8 +5,8 @@
 # Source ASDF
 . /usr/local/asdf/asdf.sh
 
-echo "Installing rails" 
-gem install rails 6.0
+echo "Installing gems" 
+gem install rails 6.0 htmlbeautifier solargraph
 
 echo "Installing yarn" 
 npm --global install yarn 
@@ -21,7 +21,7 @@ fi
 if [ -f Gemfile ]; then
     echo "installing bundle"
     bundle install
-    
+
     echo "yarn checking files"
     yarn install --check-files
 fi
