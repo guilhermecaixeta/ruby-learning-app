@@ -1,0 +1,17 @@
+{
+  "name": "Project",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": ["Shopify.ruby", "sorbet.sorbet", "Cody Hoover.ruby-linter"]
+    }
+  },
+  "remoteUser": "root",
+  "forwardPorts": [
+    3000,
+    5432
+  ],
+  "postCreateCommand": "chmod +x /app/.devcontainer/post-create.sh && /app/.devcontainer/post-create.sh"
+}

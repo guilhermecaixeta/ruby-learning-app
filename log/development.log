@@ -6431,3 +6431,536 @@ Processing by AddressesController#index as HTML
 Completed 200 OK in 34ms (Views: 23.9ms | ActiveRecord: 8.2ms | Allocations: 17617)
 
 
+  [1m[35m (1.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "agenda_development"[0m
+  ↳ lib/tasks/utils.rake:6:in `block (2 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "agenda_test"[0m
+  ↳ lib/tasks/utils.rake:6:in `block (2 levels) in <main>'
+  [1m[35m (147.2ms)[0m  [1m[35mCREATE DATABASE "agenda_development" ENCODING = 'unicode'[0m
+  ↳ lib/tasks/utils.rake:7:in `block (2 levels) in <main>'
+  [1m[35m (64.5ms)[0m  [1m[35mCREATE DATABASE "agenda_test" ENCODING = 'unicode'[0m
+  ↳ lib/tasks/utils.rake:7:in `block (2 levels) in <main>'
+  [1m[35m (10.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3963357514851621180)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+Migrating to CreateKinds (20231201201245)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "kinds" ("id" bigserial primary key, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201245"]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+Migrating to CreateContacts (20231201201411)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" bigserial primary key, "name" character varying, "email" character varying, "kind_id" bigint NOT NULL, "rmk" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c1f4bf4c44"
+FOREIGN KEY ("kind_id")
+  REFERENCES "kinds" ("id")
+)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_kind_id" ON "contacts"  ("kind_id")[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201411"]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+Migrating to CreateAddresses (20231201201454)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" bigserial primary key, "street" character varying, "city" character varying, "state" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_67e9674de3"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_addresses_on_contact_id" ON "addresses"  ("contact_id")[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201454"]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+Migrating to CreatePhones (20231201201634)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "phones" ("id" bigserial primary key, "phone" character varying, "contact_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_0c8c68a120"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_phones_on_contact_id" ON "phones"  ("contact_id")[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20231201201634"]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-12-10 16:19:27.364208"], ["updated_at", "2023-12-10 16:19:27.364208"]]
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3963357514851621180)[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ lib/tasks/utils.rake:8:in `block (2 levels) in <main>'
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[36mKind Create (0.5ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "Friend"], ["created_at", "2023-12-10 16:19:27.431004"], ["updated_at", "2023-12-10 16:19:27.431004"]]
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[36mKind Create (0.2ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "Business"], ["created_at", "2023-12-10 16:19:27.434436"], ["updated_at", "2023-12-10 16:19:27.434436"]]
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[36mKind Create (0.3ms)[0m  [1m[32mINSERT INTO "kinds" ("description", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["description", "Contact"], ["created_at", "2023-12-10 16:19:27.437232"], ["updated_at", "2023-12-10 16:19:27.437232"]]
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:9:in `block (2 levels) in <main>'
+  [1m[36mKind Load (6.9ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (1.8ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Alexandra Hirthe"], ["email", "joe_smith@rowe.test"], ["kind_id", 2], ["rmk", "Aliquid nobis tempora. Necessitatibus esse ut. Et minus consequatur."], ["created_at", "2023-12-10 16:19:28.316574"], ["updated_at", "2023-12-10 16:19:28.316574"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.4ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Claude Ullrich"], ["email", "michel@torphy.example"], ["kind_id", 3], ["rmk", "Eos alias praesentium. Nisi quos necessitatibus. Numquam natus eos."], ["created_at", "2023-12-10 16:19:28.322707"], ["updated_at", "2023-12-10 16:19:28.322707"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.2ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Wilton Bashirian"], ["email", "tera_funk@smitham.test"], ["kind_id", 3], ["rmk", "Provident nam incidunt. Consequatur ut magnam. Nam est non."], ["created_at", "2023-12-10 16:19:28.327148"], ["updated_at", "2023-12-10 16:19:28.327148"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Casimira Schmeler"], ["email", "cheri@lang-swaniawski.test"], ["kind_id", 3], ["rmk", "Ut possimus itaque. Voluptates voluptas ut. Quam laudantium labore."], ["created_at", "2023-12-10 16:19:28.331171"], ["updated_at", "2023-12-10 16:19:28.331171"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Graham Sanford"], ["email", "mistie@considine.example"], ["kind_id", 1], ["rmk", "Iusto aut eligendi. Autem ea repellat. Consequuntur voluptas cumque."], ["created_at", "2023-12-10 16:19:28.335082"], ["updated_at", "2023-12-10 16:19:28.335082"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Everette Ratke"], ["email", "freeman.pollich@herzog.example"], ["kind_id", 2], ["rmk", "Accusantium accusamus neque. Perferendis et ad. Rerum et quia."], ["created_at", "2023-12-10 16:19:28.339016"], ["updated_at", "2023-12-10 16:19:28.339016"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Freddy Haley"], ["email", "miquel@blanda.example"], ["kind_id", 1], ["rmk", "Non voluptatum repellat. Tempore praesentium quis. Veniam quos eum."], ["created_at", "2023-12-10 16:19:28.343165"], ["updated_at", "2023-12-10 16:19:28.343165"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.2ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Gov. Fredric Hagenes"], ["email", "julio@reichel.test"], ["kind_id", 3], ["rmk", "Laudantium ea labore. At corrupti soluta. Maxime iure nostrum."], ["created_at", "2023-12-10 16:19:28.347205"], ["updated_at", "2023-12-10 16:19:28.347205"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.2ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Miss Loyd Deckow"], ["email", "moises@green-schneider.example"], ["kind_id", 2], ["rmk", "Et consectetur nobis. Quas sed perspiciatis. Voluptatem amet omnis."], ["created_at", "2023-12-10 16:19:28.351217"], ["updated_at", "2023-12-10 16:19:28.351217"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ lib/tasks/utils.rake:19:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Create (0.3ms)[0m  [1m[32mINSERT INTO "contacts" ("name", "email", "kind_id", "rmk", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Eunice Bode"], ["email", "earle@maggio-price.test"], ["kind_id", 2], ["rmk", "Dicta laborum iusto. Doloremque et ex. Maiores et beatae."], ["created_at", "2023-12-10 16:19:28.355295"], ["updated_at", "2023-12-10 16:19:28.355295"]]
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:16:in `block (3 levels) in <main>'
+  [1m[36mContact Load (0.3ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ lib/tasks/utils.rake:23:in `block (2 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.6ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-639-484-5040"], ["contact_id", 1], ["created_at", "2023-12-10 16:19:28.365198"], ["updated_at", "2023-12-10 16:19:28.365198"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(915) 634-0218 x58997"], ["contact_id", 1], ["created_at", "2023-12-10 16:19:28.368840"], ["updated_at", "2023-12-10 16:19:28.368840"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "613.611.3498 x784"], ["contact_id", 1], ["created_at", "2023-12-10 16:19:28.372601"], ["updated_at", "2023-12-10 16:19:28.372601"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.6ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "766 Veum Roads"], ["city", "Wilkinsonview"], ["state", "Montana"], ["contact_id", 1], ["created_at", "2023-12-10 16:19:28.386534"], ["updated_at", "2023-12-10 16:19:28.386534"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "545-576-4331 x5427"], ["contact_id", 2], ["created_at", "2023-12-10 16:19:28.391887"], ["updated_at", "2023-12-10 16:19:28.391887"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(822) 439-9152 x491"], ["contact_id", 2], ["created_at", "2023-12-10 16:19:28.395601"], ["updated_at", "2023-12-10 16:19:28.395601"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "268 Almeda Mill"], ["city", "Rolfsonbury"], ["state", "Vermont"], ["contact_id", 2], ["created_at", "2023-12-10 16:19:28.399870"], ["updated_at", "2023-12-10 16:19:28.399870"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-772-793-7130 x9466"], ["contact_id", 3], ["created_at", "2023-12-10 16:19:28.403938"], ["updated_at", "2023-12-10 16:19:28.403938"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "361-944-9312 x16803"], ["contact_id", 3], ["created_at", "2023-12-10 16:19:28.407604"], ["updated_at", "2023-12-10 16:19:28.407604"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "5123 Kelvin Springs"], ["city", "Port Carole"], ["state", "New York"], ["contact_id", 3], ["created_at", "2023-12-10 16:19:28.411890"], ["updated_at", "2023-12-10 16:19:28.411890"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "880-138-5258"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.415645"], ["updated_at", "2023-12-10 16:19:28.415645"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(816) 524-6651 x1787"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.420243"], ["updated_at", "2023-12-10 16:19:28.420243"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-404-835-0471"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.424374"], ["updated_at", "2023-12-10 16:19:28.424374"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.7ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-854-576-3348"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.428970"], ["updated_at", "2023-12-10 16:19:28.428970"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "215.094.8746 x51746"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.434414"], ["updated_at", "2023-12-10 16:19:28.434414"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.5ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "59302 Wolff Stream"], ["city", "North Janetbury"], ["state", "Montana"], ["contact_id", 4], ["created_at", "2023-12-10 16:19:28.439025"], ["updated_at", "2023-12-10 16:19:28.439025"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.7ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "329-420-9149 x7684"], ["contact_id", 5], ["created_at", "2023-12-10 16:19:28.444271"], ["updated_at", "2023-12-10 16:19:28.444271"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "837.634.0541 x23158"], ["contact_id", 5], ["created_at", "2023-12-10 16:19:28.451720"], ["updated_at", "2023-12-10 16:19:28.451720"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-723-288-5065 x709"], ["contact_id", 5], ["created_at", "2023-12-10 16:19:28.457235"], ["updated_at", "2023-12-10 16:19:28.457235"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-936-139-9546"], ["contact_id", 5], ["created_at", "2023-12-10 16:19:28.462421"], ["updated_at", "2023-12-10 16:19:28.462421"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.5ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "8882 Carroll Mount"], ["city", "Ginoborough"], ["state", "Louisiana"], ["contact_id", 5], ["created_at", "2023-12-10 16:19:28.468702"], ["updated_at", "2023-12-10 16:19:28.468702"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(825) 416-4158 x3032"], ["contact_id", 6], ["created_at", "2023-12-10 16:19:28.473166"], ["updated_at", "2023-12-10 16:19:28.473166"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "723.876.3353 x34272"], ["contact_id", 6], ["created_at", "2023-12-10 16:19:28.477955"], ["updated_at", "2023-12-10 16:19:28.477955"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-829-591-9422 x546"], ["contact_id", 6], ["created_at", "2023-12-10 16:19:28.482406"], ["updated_at", "2023-12-10 16:19:28.482406"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "459-505-1151 x31503"], ["contact_id", 6], ["created_at", "2023-12-10 16:19:28.487471"], ["updated_at", "2023-12-10 16:19:28.487471"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "491 Smith Spring"], ["city", "Port Sammyport"], ["state", "Georgia"], ["contact_id", 6], ["created_at", "2023-12-10 16:19:28.491707"], ["updated_at", "2023-12-10 16:19:28.491707"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "748.991.3645 x4603"], ["contact_id", 7], ["created_at", "2023-12-10 16:19:28.496202"], ["updated_at", "2023-12-10 16:19:28.496202"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-131-499-2604 x938"], ["contact_id", 7], ["created_at", "2023-12-10 16:19:28.500391"], ["updated_at", "2023-12-10 16:19:28.500391"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-401-417-4334 x0687"], ["contact_id", 7], ["created_at", "2023-12-10 16:19:28.505551"], ["updated_at", "2023-12-10 16:19:28.505551"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(666) 773-8112 x6054"], ["contact_id", 7], ["created_at", "2023-12-10 16:19:28.512776"], ["updated_at", "2023-12-10 16:19:28.512776"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.6ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "739 Raymond Courts"], ["city", "West Sharenfurt"], ["state", "Illinois"], ["contact_id", 7], ["created_at", "2023-12-10 16:19:28.519487"], ["updated_at", "2023-12-10 16:19:28.519487"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-203-007-1507 x485"], ["contact_id", 8], ["created_at", "2023-12-10 16:19:28.526600"], ["updated_at", "2023-12-10 16:19:28.526600"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.5ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(787) 405-0834 x8419"], ["contact_id", 8], ["created_at", "2023-12-10 16:19:28.530544"], ["updated_at", "2023-12-10 16:19:28.530544"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(208) 562-5907"], ["contact_id", 8], ["created_at", "2023-12-10 16:19:28.535325"], ["updated_at", "2023-12-10 16:19:28.535325"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.3ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "461-537-4810 x13571"], ["contact_id", 8], ["created_at", "2023-12-10 16:19:28.539410"], ["updated_at", "2023-12-10 16:19:28.539410"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "5221 Little Burg"], ["city", "Port Lucius"], ["state", "Idaho"], ["contact_id", 8], ["created_at", "2023-12-10 16:19:28.543583"], ["updated_at", "2023-12-10 16:19:28.543583"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.3ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-544-749-1372 x147"], ["contact_id", 9], ["created_at", "2023-12-10 16:19:28.547609"], ["updated_at", "2023-12-10 16:19:28.547609"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "29385 Zachery Centers"], ["city", "Odishaven"], ["state", "Nevada"], ["contact_id", 9], ["created_at", "2023-12-10 16:19:28.552100"], ["updated_at", "2023-12-10 16:19:28.552100"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-303-545-6564"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.556670"], ["updated_at", "2023-12-10 16:19:28.556670"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "706-788-5220 x56402"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.560916"], ["updated_at", "2023-12-10 16:19:28.560916"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "1-366-246-9322"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.565530"], ["updated_at", "2023-12-10 16:19:28.565530"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.4ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "(792) 147-1288 x0916"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.569793"], ["updated_at", "2023-12-10 16:19:28.569793"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[36mPhone Create (0.3ms)[0m  [1m[32mINSERT INTO "phones" ("phone", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["phone", "802.279.6956 x53767"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.576421"], ["updated_at", "2023-12-10 16:19:28.576421"]]
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:27:in `block (4 levels) in <main>'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[36mAddress Create (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("street", "city", "state", "contact_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["street", "94712 Bergstrom Ridge"], ["city", "Framichester"], ["state", "Alaska"], ["contact_id", 10], ["created_at", "2023-12-10 16:19:28.581177"], ["updated_at", "2023-12-10 16:19:28.581177"]]
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ lib/tasks/utils.rake:33:in `block (3 levels) in <main>'
+Started GET "/?vscodeBrowserReqId=1702225444761" for 127.0.0.1 at 2023-12-10 16:24:04 +0000
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  Parameters: {"vscodeBrowserReqId"=>"1702225444761"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 79)
+  Rendered shared/_footer.html.erb (Duration: 0.4ms | Allocations: 85)
+  Rendered home/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1148)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /app/public/packs
+[Webpacker] Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-transform-class-properties.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-methods since the "loose" mode option was set to "true" for @babel/plugin-transform-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-property-in-object since the "loose" mode option was set to "true" for @babel/plugin-transform-class-properties.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-property-in-object", { "loose": true }]
+to the "plugins" section of your Babel config.
+Though the "loose" option was set to "false" in your @babel/preset-env config, it will not be used for @babel/plugin-transform-private-methods since the "loose" mode option was set to "true" for @babel/plugin-transform-private-property-in-object.
+The "loose" option must be the same for @babel/plugin-transform-class-properties, @babel/plugin-transform-private-methods and @babel/plugin-transform-private-property-in-object (when they are enabled): you can silence this warning by explicitly adding
+	["@babel/plugin-transform-private-methods", { "loose": true }]
+to the "plugins" section of your Babel config.
+
+[Webpacker] Hash: 666b4b17c239d77fe3e2
+Version: webpack 4.47.0
+Time: 984ms
+Built at: 12/10/2023 4:24:06 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-82550c4e3b8b39cde23f.js    120 KiB  application  [emitted] [immutable]  application
+js/application-82550c4e3b8b39cde23f.js.map    133 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-82550c4e3b8b39cde23f.js js/application-82550c4e3b8b39cde23f.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 748 bytes {application} [built]
+    + 3 hidden modules
+
+Completed 200 OK in 1948ms (Views: 1942.6ms | ActiveRecord: 0.0ms | Allocations: 38845)
+
+
+Started GET "/" for 127.0.0.1 at 2023-12-10 16:24:46 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered shared/_header.html.erb (Duration: 0.1ms | Allocations: 6)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 278)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.0ms | Allocations: 4581)
+
+
+Started GET "/kinds" for 127.0.0.1 at 2023-12-10 16:24:50 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (1.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds"[0m
+  ↳ app/views/kinds/index.html.erb:14
+  Rendered kinds/index.html.erb within layouts/application (Duration: 14.7ms | Allocations: 3946)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 23ms (Views: 14.3ms | ActiveRecord: 6.1ms | Allocations: 9275)
+
+
+Started GET "/" for 127.0.0.1 at 2023-12-10 16:25:08 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered shared/_header.html.erb (Duration: 0.0ms | Allocations: 6)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 277)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms | Allocations: 4629)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2023-12-10 16:25:10 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  Rendered shared/_header.html.erb (Duration: 0.0ms | Allocations: 6)
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.7ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" IN ($1, $2, $3)[0m  [["id", 2], ["id", 3], ["id", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 5)
+  Rendered contacts/index.html.erb within layouts/application (Duration: 16.6ms | Allocations: 10639)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 18.0ms | ActiveRecord: 3.3ms | Allocations: 16627)
+
+
