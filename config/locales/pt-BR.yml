@@ -1,0 +1,16 @@
+pt-BR:
+  Main: 
+    Home: "Principal"
+    Welcome: "Bem-vindo"
+    Kinds: "Tipos"
+    Addresses: "Endereços"
+    Contacts: "Contatos"
+    Phones: "Telefones"
+  Nav:
+    Menu-item:
+      Edit: "Editar"
+      Show: "Exibir"
+      Destroy: "Remover"
+      New: "Novo"
+      Send: "Enviar"
+      Back: "Voltar"

@@ -33,7 +33,7 @@
 
   <div class="actions">
     <% if action_name == 'new' %>
-      <%= form.submit "Send", class: "button" %>
+      <%= form.submit t("Nav.Menu-item.Send"), class: "button" %>
     <% else %>
       <%= link_to 'Show', @address, class: "button" %> |
     <% end %>

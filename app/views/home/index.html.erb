@@ -1,12 +1,12 @@
 <%= render partial: "/shared/header"%>
 <section>
-    <h1>Welcome</h1>
+    <h1><%= t('Main.Welcome')%></h1>
     <nav>
         <ul>
-            <li><%= link_to "Kinds", kinds_path %></li>
-            <li><%= link_to "Addresses", addresses_path %></li>
-            <li><%= link_to "Contacts", contacts_path %></li>
-            <li><%= link_to "Phones", phones_path %></li>
+            <li><%= link_to t('Kinds'), kinds_path %></li>
+            <li><%= link_to t('Addresses'), addresses_path %></li>
+            <li><%= link_to t('Contacts'), contacts_path %></li>
+            <li><%= link_to t('Phones'), phones_path %></li>
         </ul>
     </nav>
 </section>

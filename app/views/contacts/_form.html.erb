@@ -2,7 +2,6 @@
   <% if contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
       <ul>
         <% contact.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,33 +9,43 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-
   <div class="field">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
-
   <div class="field">
-    <%= form.label :kind_id %><br>
+    <%= form.label :kind %><br>
     <%= collection_select(:contact, :kind_id, @kinds, :id, :description) %>
   </div>
-
+  <div>
+    <%= form.fields_for :address do |address_fields|%>
+      <div class="field">
+        <%= address_fields.label :address %><br>
+        <%= address_fields.text_field :street %>
+      </div>
+      <div class="field">
+        <%= address_fields.label :city %><br>
+        <%= address_fields.text_field :city %>
+      </div>
+      <div class="field">
+        <%= address_fields.label :state %><br>
+        <%= address_fields.text_field :state %>
+      </div>
+    <% end %>
+  </div>
   <div class="field">
     <%= form.label :rmk %>
     <%= form.text_area :rmk %>
-    </div>
-
+  </div>
   <div class="actions">
-    <% if action_name == 'new'  %>
-      <%= form.submit "Send", class: "button" %>
-    <% else %>
-      <%= link_to 'Show', @contact, class: "button" %>
+    <%= form.submit t("Nav.Menu-item.Send"), class: "button" %>
+    <% if action_name == 'edit'  %>
+      <%= link_to t('Nav.Menu-item.Show'), @contact, class: "button" %>
     <% end %>
-    <%= link_to 'Back', contacts_path, class: "button" %>
+    <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "button" %>
   </div>
 <% end %>

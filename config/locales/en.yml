@@ -30,4 +30,18 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  Main:
+    Home: "Home"
+    Welcome: "Welcome"
+    Kinds: "Kinds"
+    Addresses: "Addresses"
+    Contacts: "Contacts"
+    Phones: "Phones"
+  Nav:
+    Menu-items:
+      Edit: "Edit"
+      Show: "Show"
+      Destroy: "Destroy"
+      New: "New"
+      Send: "Send"
+      Back: "Back"
