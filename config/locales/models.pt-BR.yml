@@ -1,9 +1,18 @@
 "pt-BR":
   activerecord:
     models:
-      contact: "Contato"
-      address: "Endereço"
-      phone: "Telefone"
+      contact: 
+        one: "Contato"
+        other: "Contatos"
+      address:
+        one: "Endereço"
+        other: "Endereços"
+      phone:
+        one: "Telefone"
+        other: "Telefones"
+      kind:
+        one: "Tipo de Contato"
+        other: "Tipos de Contato"
     attributes:
       contact:
         name: "Nome"
@@ -13,5 +22,8 @@
       address:
         street: "Rua"
         city: "Cidade"
-        state: "Estado/Província"
+        state: "Estado/Província/Distrito"
       phone:
+        phone: "Telefone"
+      kind:
+        description: "Descrição"

@@ -5,13 +5,22 @@
   "workspaceFolder": "/app",
   "customizations": {
     "vscode": {
-      "extensions": ["Shopify.ruby", "sorbet.sorbet", "Cody Hoover.ruby-linter"]
+      "extensions": ["shopify.ruby", "shopify.ruby-lsp", "sorbet.ruby-sorbert", "ali-ariff.erb-formatter/beautify", "castwide.ruby-solargraph"]
     }
   },
   "remoteUser": "root",
+  "containerUser": "vscode",
   "forwardPorts": [
     3000,
     5432
   ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "notify",
+      "protocol": "http",
+      "elevateIfNeeded": true
+    }
+  },
   "postCreateCommand": "chmod +x /app/.devcontainer/post-create.sh && /app/.devcontainer/post-create.sh"
 }

@@ -1,7 +1,7 @@
 <%= form_with(model: contact, local: true, class: "basic-grey") do |form| %>
   <% if contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+      <h2><%= pluralize(contact.errors.count, "error") %> <%= t 'Message.Error.Contact' %></h2>
       <ul>
         <% contact.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -19,7 +19,15 @@
   </div>
   <div class="field">
     <%= form.label :kind %><br>
-    <%= collection_select(:contact, :kind_id, @kinds, :id, :description) %>
+    <%= form.collection_select(:kind_id, @kinds, :id, :description) %>
+  </div>
+  <div id="phones">
+    <div class="field">
+      <%= link_to_add_association('Add Phone', form, :phones, 'data-association-insertion-method' => "after" ) %>
+    </div>
+    <%= form.fields_for :phones do |phone_form|%>
+      <%= render "phone_fields", f: phone_form %>
+    <% end %>
   </div>
   <div>
     <%= form.fields_for :address do |address_fields|%>
@@ -33,7 +41,7 @@
       </div>
       <div class="field">
         <%= address_fields.label :state %><br>
-        <%= address_fields.text_field :state %>
+        <%= address_fields.select :state, options_for_states(@contact.address.state) %>
       </div>
     <% end %>
   </div>

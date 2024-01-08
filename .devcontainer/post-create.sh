@@ -5,9 +5,6 @@
 # Source ASDF
 . /usr/local/asdf/asdf.sh
 
-echo "Installing gems" 
-gem install rails 6.0 htmlbeautifier solargraph
-
 echo "Installing yarn" 
 npm --global install yarn 
 
@@ -24,4 +21,10 @@ if [ -f Gemfile ]; then
 
     echo "yarn checking files"
     yarn install --check-files
+
+    echo "Installing gems" 
+    gem install rails:6.0 htmlbeautifier solargraph sorbet:0.5.10187
+
+    # echo "initializing tapioca"
+    bundle exec tapioca init
 fi

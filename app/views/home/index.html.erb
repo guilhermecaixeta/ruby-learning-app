@@ -1,13 +1,13 @@
 <%= render partial: "/shared/header"%>
-<section>
+<section class="basic-grey">
+  <section>
     <h1><%= t('Main.Welcome')%></h1>
-    <nav>
-        <ul>
-            <li><%= link_to t('Kinds'), kinds_path %></li>
-            <li><%= link_to t('Addresses'), addresses_path %></li>
-            <li><%= link_to t('Contacts'), contacts_path %></li>
-            <li><%= link_to t('Phones'), phones_path %></li>
-        </ul>
-    </nav>
+    <ul>
+      <li><%= link_to Kind.model_name.human(count: 2), kinds_path %></li>
+      <li><%= link_to Address.model_name.human(count: 2), addresses_path %></li>
+      <li><%= link_to Contact.model_name.human(count: 2), contacts_path %></li>
+      <li><%= link_to Phone.model_name.human(count: 2), phones_path %></li>
+    </ul>
+  </section>
+  <%= render partial: "/shared/footer"%>
 </section>
-<%= render partial: "/shared/footer"%>

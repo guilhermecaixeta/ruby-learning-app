@@ -6,6 +6,8 @@ pt-BR:
     Addresses: "Endereços"
     Contacts: "Contatos"
     Phones: "Telefones"
+    Title:
+      Editing: "Editando"
   Nav:
     Menu-item:
       Edit: "Editar"
@@ -14,3 +16,15 @@ pt-BR:
       New: "Novo"
       Send: "Enviar"
       Back: "Voltar"
+  Message:
+    New:
+      Success:
+        Contact: "Contato foi criado com sucesso."
+    Edit:
+      Success:
+        Contact: "Contato foi atualizado com sucesso."
+    Delete:
+      Success:
+        Contact: "Contato foi removido com sucesso."
+    Error: 
+      Contact: "Esse contato está proibido de ser salvo:"

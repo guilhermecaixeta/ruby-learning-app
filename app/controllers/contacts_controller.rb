@@ -3,7 +3,10 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.includes("kind").all
+    @contacts = Contact
+      .order(:name)
+      .page(params[:page])
+      .per(15)
   end
 
   # GET /contacts/1 or /contacts/1.json
@@ -14,12 +17,14 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @contact.build_address
-
     get_kinds_for_select
   end
 
   # GET /contacts/1/edit
   def edit
+    if (@contact.address == nil)
+      @contact.build_address
+    end
     get_kinds_for_select
   end
 
@@ -29,7 +34,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to contact_url(@contact), notice: "Contact was successfully created." }
+        format.html { redirect_to contact_url(@contact), notice: t('Message.New.Success.Contact') }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +47,7 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
+        format.html { redirect_to contact_url(@contact), notice: t('Message.Edit.Success.Contact') }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +61,7 @@ class ContactsController < ApplicationController
     @contact.destroy
 
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
+      format.html { redirect_to contacts_url, notice: t('Message.Delete.Success.Contact') }
       format.json { head :no_content }
     end
   end
@@ -67,11 +72,21 @@ class ContactsController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = Contact.find(params[:id])
+      @contact = Contact
+      .includes("kind")
+      .includes("phones")
+      .includes("address")
+      .find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :kind_id, :rmk, address_attributes: [:street, :city, :state, :id ])
+      params.require(:contact).permit(
+        :name,
+        :email,
+        :kind_id,
+        :rmk,
+        address_attributes: [:street, :city, :state, :id ],
+        phones_attributes: [:id, :phone, :_destroy])
     end
 end

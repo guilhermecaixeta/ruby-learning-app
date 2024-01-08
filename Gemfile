@@ -25,6 +25,12 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'faker'
+# About Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
+gem "cocoon"
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks and ORMs
+gem "kaminari"
+# A ruby translation project for kaminari managed on Locale that's open to all!
+gem "kaminari-i18n"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -32,9 +38,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Tapioca makes it easy to work with Sorbet in your codebase.
+  # gem 'tapioca', '~> 0.5.1', require: false
 end
 
 group :development do
+  gem 'pry-rails'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'

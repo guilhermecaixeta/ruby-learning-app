@@ -12,7 +12,7 @@ namespace :utils do
   desc "Seeds db with random 10 new contacts"
   task db_seeding: :environment do
     puts "Generating contacts"
-    10.times do |i|
+    100.times do |i|
       Contact.create!(
         name: Faker::Name.name,
         email: Faker::Internet.email,

@@ -45,3 +45,15 @@ en:
       New: "New"
       Send: "Send"
       Back: "Back"
+  Message:
+    New:
+      Success:
+        Contact: "Contact was successfully created."
+    Edit:
+      Success:
+        Contact: "Contact was successfully updated."
+    Delete:
+      Success:
+        Contact: "Contact was successfully destroyed."
+    Error: 
+      Contact: "Prohibited this contact from being saved:"

@@ -1,31 +1,43 @@
-<section class="basic-grey">
+<%= render partial: "/shared/header"%>
+<article class="basic-grey">
   <section>
     <p id="notice">
       <%= notice %>
     </p>
-
     <p>
-      <strong>Name:</strong>
+      <strong><%= Contact.human_attribute_name("name") %>:</strong>
       <%= @contact.name %>
     </p>
-
     <p>
-      <strong>Email:</strong>
+      <strong><%= Contact.human_attribute_name("email") %>:</strong>
       <%= @contact.email %>
     </p>
-
     <p>
-      <strong>Kind:</strong>
-      <%= @contact.kind_id %>
+      <strong><%= Contact.human_attribute_name("kind") %>:</strong>
+      <%= @contact.kind.description %>
     </p>
-
     <p>
-      <strong>Rmk:</strong>
-      <%= @contact.rmk %>
+      <strong><%= Contact.human_attribute_name("address") %>:</strong>
+      <%= "#{@contact.address.street}, #{@contact.address.city}, #{@contact.address.state}" %>
+    </p>
+    <p>
+      <strong><%= Contact.human_attribute_name("phones") %>:</strong>
+      <% @contact.phones.each do |phone| %>
+        <p>
+          <%= phone.phone %>
+        </p>
+      <% end %>
+    </p>
+    <p>
+      <strong><%= Contact.human_attribute_name("rmk") %>:</strong>
+      <p>
+        <%= @contact.rmk %>
+      </p>
     </p>
   </section>
   <section>
     <%= link_to 'Edit', edit_contact_path(@contact), class: "button" %>
     <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "button" %>
   </section>
-</section>
+</article>
+<%= render partial: "/shared/footer"%>
