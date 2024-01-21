@@ -1,11 +1,15 @@
-<%= render partial: "shared/header" %>
 <section class="container-sm container-md container-lg">
   <p id="notice"><%= notice %></p>
   <p>
     <strong>Description:</strong>
     <%= @kind.description %>
   </p>
-  <%= link_to 'Edit', edit_kind_path(@kind), class: "button" %>
-  <%= link_to 'Back', kinds_path, class: "button" %>
 </section>
-<%= render partial: "shared/footer" %>
+<section class="actions row mb-3">
+  <div class="col-1">
+    <%= link_to 'Edit', edit_kind_path(@kind), class: "btn btn-outline-secondary" %>
+  </div>
+  <div class="col-1">
+    <%= link_to t('Nav.Menu-item.Back'), kinds_path, class: "btn btn-outline-secondary" %>
+  </div>
+</section>

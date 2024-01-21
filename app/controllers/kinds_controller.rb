@@ -3,7 +3,10 @@ class KindsController < ApplicationController
 
   # GET /kinds or /kinds.json
   def index
-    @kinds = Kind.all
+    @kinds = Kind
+      .all
+      .page(params[:page])
+      .per(5)
   end
 
   # GET /kinds/1 or /kinds/1.json

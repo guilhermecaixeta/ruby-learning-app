@@ -10,15 +10,15 @@
         </ul>
       </section>
     <% end %>
-    <section class="field col-6 mb-3">
+    <section class="col-6 mb-3">
       <%= form.label :name, class: "form-label" %>
       <%= form.text_field :name, class: "form-control" %>
     </section>
-    <section class="field col-6 mb-3">
+    <section class="col-6 mb-3">
       <%= form.label :email, class: "form-label" %>
       <%= form.text_field :email, class: "form-control" %>
     </section>
-    <section class="field col-6 mb-3">
+    <section class="col-6 mb-3">
       <%= form.label :kind, class: "form-label" %>
       <%= form.collection_select(:kind_id, @kinds, :id, :description, {}, {:class => "form-select"}) %>
     </section>
@@ -31,25 +31,25 @@
       <% end %>
     </section>
     <%= form.fields_for :address do |address_form|%>
-      <section class="field col-6 mb-3">
+      <section class="col-6 mb-3">
         <%= address_form.label :address, class: "form-label" %>
         <%= address_form.text_field :street, class: "form-control" %>
       </section>
-      <section class="field col-6 mb-3">
+      <section class="col-6 mb-3">
         <%= address_form.label :city, class: "form-label" %>
         <%= address_form.text_field :city, class: "form-control" %>
       </section>
-      <section class="field col-6 mb-3">
+      <section class="col-6 mb-3">
         <%= address_form.label :state, class: "form-label" %>
         <%= address_form.select :state, options_for_states(@contact.address.state), {}, {:class => "form-select"} %>
       </section>
     <% end %>
-    <section class="field col-6 mb-3">
+    <section class="col-6 mb-3">
       <%= form.label :rmk, class: "form-label" %>
       <%= form.text_area :rmk, class: "form-control" %>
     </section>
   </section>
-  <section class="row mb-3">
+  <section class="actions row mb-3">
     <section class="col-2">
       <%= form.submit t("Nav.Menu-item.Send"), class: "btn btn-outline-info" %>
     </section>

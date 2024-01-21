@@ -1,5 +1,4 @@
-  
-<section class="container-sm container-md container-lg row">
+<section class="container-sm container-md container-lg row mb-3">
   <p id="notice">
     <%= notice %>
   </p>
@@ -34,11 +33,11 @@
     </p>
   </p>
 </section>
-<section class="row">
-  <div class="col-6">
+<section class="actions row mb-3">
+  <div class="col-1">
     <%= link_to 'Edit', edit_contact_path(@contact), class: "btn btn-outline-secondary" %>
   </div>
-  <div class="col-6 align-items-left">
+  <div class="col-1">
     <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "btn btn-outline-secondary" %>
   </div>
 </section>

@@ -1,23 +1,31 @@
-<%= form_with(model: kind, local: true, class: "container-sm container-md container-lg") do |form| %>
-  <% if kind.errors.any? %>
-    <section id="error_explanation">
-      <h2><%= pluralize(kind.errors.count, "error") %> prohibited this kind from being saved:</h2>
-      <ul>
-        <% kind.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </section>
-  <% end %>
-  <section class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </section>
-  <section class="actions">
-    <%= form.submit t("Nav.Menu-item.Send"), class: "button" %>
-    <% if action_name == 'edit' %>
-      <%= link_to 'Show', @kind, class: "button" %>
+<%= form_with(model: kind, local: true) do |form| %>
+  <section class="row mb-3">
+    <% if kind.errors.any? %>
+      <section id="error_explanation">
+        <h2><%= pluralize(kind.errors.count, "error") %> prohibited this kind from being saved:</h2>
+        <ul>
+          <% kind.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </section>
     <% end %>
-    <%= link_to 'Back', kinds_path, class: "button" %>
+    <section class="col-6 mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </section>
+  </section>
+  <section class="actions row mb-3">
+    <section class="col-2">
+      <%= form.submit t("Nav.Menu-item.Send"), class: "btn btn-outline-info" %>
+    </section>
+    <% if action_name == 'edit'  %>
+      <section class="col-2">
+        <%= link_to t('Nav.Menu-item.Show'), @kind, class: "btn btn-outline-secondary" %>
+      </section>
+    <% end %>
+    <section class="col-2">
+      <%= link_to t('Nav.Menu-item.Back'), kinds_path, class: "btn btn-outline-warning" %>
+    </section>
   </section>
 <% end %>
