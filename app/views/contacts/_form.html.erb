@@ -1,59 +1,65 @@
-<%= form_with(model: contact, local: true, class: "basic-grey") do |form| %>
-  <% if contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> <%= t 'Message.Error.Contact' %></h2>
-      <ul>
-        <% contact.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-  <div class="field">
-    <%= form.label :kind %><br>
-    <%= form.collection_select(:kind_id, @kinds, :id, :description) %>
-  </div>
-  <div id="phones">
-    <div class="field">
-      <%= link_to_add_association('Add Phone', form, :phones, 'data-association-insertion-method' => "after" ) %>
-    </div>
-    <%= form.fields_for :phones do |phone_form|%>
-      <%= render "phone_fields", f: phone_form %>
+<%= form_with(model: contact, local: true) do |form| %>
+  <section class="row mb-3">
+    <% if contact.errors.any? %>
+      <section id="error_explanation">
+        <h2><%= pluralize(contact.errors.count, "error") %> <%= t 'Message.Error.Contact' %></h2>
+        <ul>
+          <% contact.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </section>
     <% end %>
-  </div>
-  <div>
-    <%= form.fields_for :address do |address_fields|%>
-      <div class="field">
-        <%= address_fields.label :address %><br>
-        <%= address_fields.text_field :street %>
-      </div>
-      <div class="field">
-        <%= address_fields.label :city %><br>
-        <%= address_fields.text_field :city %>
-      </div>
-      <div class="field">
-        <%= address_fields.label :state %><br>
-        <%= address_fields.select :state, options_for_states(@contact.address.state) %>
-      </div>
+    <section class="field col-6 mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </section>
+    <section class="field col-6 mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.text_field :email, class: "form-control" %>
+    </section>
+    <section class="field col-6 mb-3">
+      <%= form.label :kind, class: "form-label" %>
+      <%= form.collection_select(:kind_id, @kinds, :id, :description, {}, {:class => "form-select"}) %>
+    </section>
+    <section id="phones" class="col-6 mb-3">
+      <section class="mb-3">
+        <%= link_to_add_association('Add Phone', form, :phones, 'data-association-insertion-method' => "after" ) %>
+      </section>
+      <%= form.fields_for :phones do |phone_form|%>
+        <%= render "phone_fields", f: phone_form %>
+      <% end %>
+    </section>
+    <%= form.fields_for :address do |address_form|%>
+      <section class="field col-6 mb-3">
+        <%= address_form.label :address, class: "form-label" %>
+        <%= address_form.text_field :street, class: "form-control" %>
+      </section>
+      <section class="field col-6 mb-3">
+        <%= address_form.label :city, class: "form-label" %>
+        <%= address_form.text_field :city, class: "form-control" %>
+      </section>
+      <section class="field col-6 mb-3">
+        <%= address_form.label :state, class: "form-label" %>
+        <%= address_form.select :state, options_for_states(@contact.address.state), {}, {:class => "form-select"} %>
+      </section>
     <% end %>
-  </div>
-  <div class="field">
-    <%= form.label :rmk %>
-    <%= form.text_area :rmk %>
-  </div>
-  <div class="actions">
-    <%= form.submit t("Nav.Menu-item.Send"), class: "button" %>
+    <section class="field col-6 mb-3">
+      <%= form.label :rmk, class: "form-label" %>
+      <%= form.text_area :rmk, class: "form-control" %>
+    </section>
+  </section>
+  <section class="row mb-3">
+    <section class="col-2">
+      <%= form.submit t("Nav.Menu-item.Send"), class: "btn btn-outline-info" %>
+    </section>
     <% if action_name == 'edit'  %>
-      <%= link_to t('Nav.Menu-item.Show'), @contact, class: "button" %>
+      <section class="col-2">
+        <%= link_to t('Nav.Menu-item.Show'), @contact, class: "btn btn-outline-secondary" %>
+      </section>
     <% end %>
-    <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "button" %>
-  </div>
+    <section class="col-2">
+      <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "btn btn-outline-warning" %>
+    </section>
+  </section>
 <% end %>

@@ -1,5 +1,9 @@
-<div class="nested-fields">
-  <%= f.label :phone %><br>
-  <%= link_to_remove_association 'Remove', f %>
-  <%= f.text_field :phone %>
+<div class="nested-fields row col">
+  <div class="col-6">
+    <%= f.label :phone, class: "form-label" %>
+  </div>
+  <div class="col-6">
+    <%= link_to_remove_association 'Remove', f %>
+  </div>
+  <%= f.text_field :phone, class: "form-control" %>
 </div>

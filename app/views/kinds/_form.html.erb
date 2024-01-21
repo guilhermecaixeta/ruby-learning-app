@@ -1,4 +1,4 @@
-<%= form_with(model: kind, local: true, class: "basic-grey") do |form| %>
+<%= form_with(model: kind, local: true, class: "container-sm container-md container-lg") do |form| %>
   <% if kind.errors.any? %>
     <section id="error_explanation">
       <h2><%= pluralize(kind.errors.count, "error") %> prohibited this kind from being saved:</h2>

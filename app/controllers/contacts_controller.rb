@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[ show edit update destroy ]
+  before_action :get_kinds_for_select, except: %i[ show destroy ]
+  http_basic_authenticate_with name: "secret-user", password: "secret-password", only: :destroy
 
   # GET /contacts or /contacts.json
   def index
@@ -17,7 +19,6 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @contact.build_address
-    get_kinds_for_select
   end
 
   # GET /contacts/1/edit
@@ -25,7 +26,6 @@ class ContactsController < ApplicationController
     if (@contact.address == nil)
       @contact.build_address
     end
-    get_kinds_for_select
   end
 
   # POST /contacts or /contacts.json

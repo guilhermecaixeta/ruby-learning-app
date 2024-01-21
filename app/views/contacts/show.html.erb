@@ -1,43 +1,44 @@
-<%= render partial: "/shared/header"%>
-<article class="basic-grey">
-  <section>
-    <p id="notice">
-      <%= notice %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("name") %>:</strong>
-      <%= @contact.name %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("email") %>:</strong>
-      <%= @contact.email %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("kind") %>:</strong>
-      <%= @contact.kind.description %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("address") %>:</strong>
-      <%= "#{@contact.address.street}, #{@contact.address.city}, #{@contact.address.state}" %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("phones") %>:</strong>
-      <% @contact.phones.each do |phone| %>
-        <p>
-          <%= phone.phone %>
-        </p>
-      <% end %>
-    </p>
-    <p>
-      <strong><%= Contact.human_attribute_name("rmk") %>:</strong>
+  
+<section class="container-sm container-md container-lg row">
+  <p id="notice">
+    <%= notice %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("name") %>:</strong>
+    <%= @contact.name %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("email") %>:</strong>
+    <%= @contact.email %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("kind") %>:</strong>
+    <%= @contact.kind.description %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("address") %>:</strong>
+    <%= "#{@contact.address.street}, #{@contact.address.city}, #{@contact.address.state}" %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("phones") %>:</strong>
+    <% @contact.phones.each do |phone| %>
       <p>
-        <%= @contact.rmk %>
+        <%= phone.phone %>
       </p>
+    <% end %>
+  </p>
+  <p>
+    <strong><%= Contact.human_attribute_name("rmk") %>:</strong>
+    <p>
+      <%= @contact.rmk %>
     </p>
-  </section>
-  <section>
-    <%= link_to 'Edit', edit_contact_path(@contact), class: "button" %>
-    <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "button" %>
-  </section>
-</article>
-<%= render partial: "/shared/footer"%>
+  </p>
+</section>
+<section class="row">
+  <div class="col-6">
+    <%= link_to 'Edit', edit_contact_path(@contact), class: "btn btn-outline-secondary" %>
+  </div>
+  <div class="col-6 align-items-left">
+    <%= link_to t('Nav.Menu-item.Back'), contacts_path, class: "btn btn-outline-secondary" %>
+  </div>
+</section>

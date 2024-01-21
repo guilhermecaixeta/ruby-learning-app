@@ -5,4 +5,7 @@ class Contact < ApplicationRecord
 
   accepts_nested_attributes_for :address, allow_destroy: true
   accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: :all_blank
+
+  validates :name, presence: true
+  validates :email, presence: true
 end

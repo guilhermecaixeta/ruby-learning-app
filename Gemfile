@@ -24,6 +24,11 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+# Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff http://rails-i18n.org
+gem 'rails-i18n'
+
+gem 'rails-assets-bootstrap', source: 'https://rails-assets.org'
+
 gem 'faker'
 # About Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
 gem "cocoon"
@@ -31,7 +36,6 @@ gem "cocoon"
 gem "kaminari"
 # A ruby translation project for kaminari managed on Locale that's open to all!
 gem "kaminari-i18n"
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
