@@ -29543,3 +29543,313 @@ Processing by ContactsController#index as HTML
 Completed 200 OK in 38ms (Views: 34.8ms | ActiveRecord: 2.4ms | Allocations: 22075)
 
 
+Started GET "/contacts" for 127.0.0.1 at 2024-01-22 12:01:22 +0000
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (1.7ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:31
+  Rendered contacts/index.html.erb within layouts/application (Duration: 1231.0ms | Allocations: 1304373)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.4ms | Allocations: 172)
+  Rendered shared/_footer.html.erb (Duration: 0.3ms | Allocations: 105)
+Completed 200 OK in 1321ms (Views: 1294.0ms | ActiveRecord: 14.3ms | Allocations: 1363577)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2024-01-22 12:01:28 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:31
+  Rendered contacts/index.html.erb within layouts/application (Duration: 19.6ms | Allocations: 18054)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+Completed 200 OK in 29ms (Views: 26.2ms | ActiveRecord: 1.8ms | Allocations: 28919)
+
+
+Started GET "/" for 127.0.0.1 at 2024-01-22 12:01:29 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 361)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.3ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 13ms (Views: 12.5ms | ActiveRecord: 0.0ms | Allocations: 12055)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2024-01-22 12:01:31 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.1ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:31
+  Rendered contacts/index.html.erb within layouts/application (Duration: 29.4ms | Allocations: 18054)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+Completed 200 OK in 40ms (Views: 37.3ms | ActiveRecord: 2.2ms | Allocations: 28917)
+
+
+Started GET "/contacts?page=7" for 127.0.0.1 at 2024-01-22 12:01:34 +0000
+Processing by ContactsController#index as HTML
+  Parameters: {"page"=>"7"}
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.6ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 90]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.4ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  Rendered contacts/index.html.erb within layouts/application (Duration: 25.2ms | Allocations: 12534)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 36ms (Views: 33.5ms | ActiveRecord: 1.8ms | Allocations: 23389)
+
+
+Started GET "/contacts?page=3" for 127.0.0.1 at 2024-01-22 12:01:39 +0000
+Processing by ContactsController#index as HTML
+  Parameters: {"page"=>"3"}
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.5ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 30]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.2ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:31
+  Rendered contacts/index.html.erb within layouts/application (Duration: 20.6ms | Allocations: 19001)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 61)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 29ms (Views: 26.6ms | ActiveRecord: 1.8ms | Allocations: 29850)
+
+
+Started GET "/contacts" for 127.0.0.1 at 2024-01-22 12:01:42 +0000
+Processing by ContactsController#index as HTML
+  Rendering contacts/index.html.erb within layouts/application
+  [1m[36mContact Load (0.4ms)[0m  [1m[34mSELECT "contacts".* FROM "contacts" ORDER BY "contacts"."name" ASC LIMIT $1 OFFSET $2[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/contacts/index.html.erb:15
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[36mCACHE Kind Load (0.0ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/contacts/index.html.erb:19
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "contacts"[0m
+  ↳ app/views/contacts/index.html.erb:31
+  Rendered contacts/index.html.erb within layouts/application (Duration: 33.6ms | Allocations: 18028)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 48ms (Views: 44.7ms | ActiveRecord: 2.8ms | Allocations: 28881)
+
+
+Started GET "/" for 127.0.0.1 at 2024-01-22 12:01:48 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 171)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.0ms | Allocations: 10919)
+
+
+Started GET "/kinds" for 127.0.0.1 at 2024-01-22 12:01:49 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1 OFFSET $2[0m  [["LIMIT", 5], ["OFFSET", 0]]
+  ↳ app/views/kinds/index.html.erb:12
+  Rendered kinds/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1953)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.3ms | Allocations: 13777)
+
+
+Started GET "/kinds/1" for 127.0.0.1 at 2024-01-22 12:01:52 +0000
+Processing by KindsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mKind Load (0.3ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" WHERE "kinds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/kinds_controller.rb:66:in `set_kind'
+  Rendering kinds/show.html.erb within layouts/application
+  Rendered kinds/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 306)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.3ms | Allocations: 62)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 15ms (Views: 12.1ms | ActiveRecord: 0.3ms | Allocations: 11874)
+
+
+Started GET "/kinds" for 127.0.0.1 at 2024-01-22 12:01:53 +0000
+Processing by KindsController#index as HTML
+  Rendering kinds/index.html.erb within layouts/application
+  [1m[36mKind Load (0.5ms)[0m  [1m[34mSELECT "kinds".* FROM "kinds" LIMIT $1 OFFSET $2[0m  [["LIMIT", 5], ["OFFSET", 0]]
+  ↳ app/views/kinds/index.html.erb:12
+  Rendered kinds/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1640)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered shared/_header.html.erb (Duration: 0.2ms | Allocations: 61)
+  Rendered shared/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+Completed 200 OK in 16ms (Views: 14.0ms | ActiveRecord: 0.5ms | Allocations: 12452)
+
+
